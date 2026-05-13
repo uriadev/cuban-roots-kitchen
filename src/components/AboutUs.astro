@@ -1,0 +1,70 @@
+---
+import { Phone, MapPin } from "@lucide/astro";
+import { Image } from "astro:assets";
+import ropavieja from "../assets/ropavieja.png";
+---
+
+<section class="py-20 bg-slate-50" id="about-us">
+    <div class="max-w-300 mx-auto px-4 md:px-10">
+        <div class="flex flex-col md:flex-row items-center gap-16">
+            <div class="md:w-1/2 relative">
+                <div
+                    class="absolute -top-4 -left-4 w-24 h-24 bg-primary/10 rounded-full -z-10"
+                >
+                </div>
+                <div
+                    class="absolute -bottom-4 -right-4 w-32 h-32 bg-secondary/10 rounded-full -z-10"
+                >
+                </div>
+                <div
+                    class="rounded-3xl overflow-hidden shadow-2xl rotate-2 hover:rotate-0 transition-transform duration-500"
+                >
+                    <Image
+                        src={ropavieja}
+                        width={528}
+                        height={528}
+                        class="w-full h-auto object-cover"
+                        alt="Traditional Cuban Ropa Vieja plate with beef rice and plantains"
+                    />
+                </div>
+                <div
+                    class="hidden md:block absolute bottom-8 -left-8 bg-green-800 text-white p-6 rounded-xl shadow-xl max-w-xs"
+                >
+                    <h4 class="font-serif text-xl mb-2">Ven a visitarnos</h4>
+                    <div class="flex items-start gap-3 text-sm opacity-90 mb-2">
+                        <Phone class="text-base mt-1" />
+                        <p>(123) 456 - 7890</p>
+                    </div>
+                    <div class="flex items-start gap-3 text-sm opacity-90">
+                        <MapPin class="text-base mt-1" />
+                        <p>837 W. Marshall Lane, Marshalltown, IA</p>
+                    </div>
+                </div>
+            </div>
+            <div class="md:w-1/2">
+                <h2
+                    class="text-4xl md:text-5xl font-serif font-medium text-gray-900 mb-6"
+                >
+                    We provide healthy food for your family.
+                </h2>
+                <p
+                    class="text-gray-600 text-lg leading-relaxed mb-8 font-light"
+                >
+                    Our story began with a vision to create a unique dining
+                    experience that merges fine dining, exceptional service, and
+                    a vibrant ambiance. Rooted in rich culinary culture, we aim
+                    to honor our local roots while infusing a global palate.
+                    <br /><br />
+                    At place, we believe that dining is not just about food, but also
+                    about the overall experience. Our staff, renowned for their warmth
+                    and dedication, strives to make every visit an unforgettable event.
+                </p>
+                <button
+                    class="px-8 py-3 bg-primary hover:bg-orange-700 text-white text-sm font-bold rounded-full transition-colors shadow-lg shadow-orange-200"
+                >
+                    More About Us
+                </button>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,85 @@
+---
+import { Sandwich, Salad, CupSoda, CakeSlice } from "@lucide/astro";
+---
+
+<section class="py-24 px-4 md:px-10 max-w-350 mx-auto relative overflow-hidden">
+    <div class="text-center mb-16">
+        <h2
+            class="text-4xl md:text-5xl font-serif font-medium text-gray-900 mb-4"
+        >
+            Browse Our Menu
+        </h2>
+        <div class="w-20 h-1 bg-primary mx-auto rounded-full opacity-20"></div>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div
+            class="group bg-white p-8 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 text-center border border-slate-100"
+        >
+            <div
+                class="w-16 h-16 mx-auto bg-green-50 rounded-full flex items-center justify-center text-accent-green mb-6 group-hover:bg-primary group-hover:text-white transition-colors"
+            >
+                <Sandwich class="text-3xl" />
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-3">Sandwiches</h3>
+            <p class="text-gray-500 text-sm leading-relaxed mb-6">
+                El clásico Cubano y variaciones modernas con pan recién
+                horneado.
+            </p>
+            <a
+                class="text-primary text-sm font-bold uppercase tracking-wider hover:text-orange-700"
+                href="/menu/sandwichs">Ver Opciones</a
+            >
+        </div>
+        <div
+            class="group bg-white p-8 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 text-center border border-slate-100"
+        >
+            <div
+                class="w-16 h-16 mx-auto bg-green-50 rounded-full flex items-center justify-center text-accent-green mb-6 group-hover:bg-primary group-hover:text-white transition-colors"
+            >
+                <Salad class="text-3xl" />
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-3">Platos Fuertes</h3>
+            <p class="text-gray-500 text-sm leading-relaxed mb-6">
+                Ropa Vieja, Lechón y Arroz con Pollo con el sazón de la abuela.
+            </p>
+            <a
+                class="text-primary text-sm font-bold uppercase tracking-wider hover:text-orange-700"
+                href="/menu/main-courses">Ver Opciones</a
+            >
+        </div>
+        <div
+            class="group bg-white p-8 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 text-center border border-slate-100"
+        >
+            <div
+                class="w-16 h-16 mx-auto bg-green-50 rounded-full flex items-center justify-center text-accent-green mb-6 group-hover:bg-primary group-hover:text-white transition-colors"
+            >
+                <CupSoda class="text-3xl" />
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-3">Bebidas</h3>
+            <p class="text-gray-500 text-sm leading-relaxed mb-6">
+                Mojitos refrescantes y jugos naturales de frutas tropicales.
+            </p>
+            <a
+                class="text-primary text-sm font-bold uppercase tracking-wider hover:text-orange-700"
+                href="/menu/drinks">Ver Opciones</a
+            >
+        </div>
+        <div
+            class="group bg-white p-8 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 text-center border border-slate-100"
+        >
+            <div
+                class="w-16 h-16 mx-auto bg-green-50 rounded-full flex items-center justify-center text-accent-green mb-6 group-hover:bg-primary group-hover:text-white transition-colors"
+            >
+                <CakeSlice class="text-3xl" />
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-3">Postres</h3>
+            <p class="text-gray-500 text-sm leading-relaxed mb-6">
+                Pastelitos de guayaba y churros para el final perfecto.
+            </p>
+            <a
+                class="text-primary text-sm font-bold uppercase tracking-wider hover:text-orange-700"
+                href="/menu/desserts">Ver Opciones</a
+            >
+        </div>
+    </div>
+</section>

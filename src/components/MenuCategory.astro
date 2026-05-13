@@ -1,0 +1,15 @@
+---
+import clsx from "clsx";
+const { isActive, href } = Astro.props;
+const activeCls = isActive
+    ? "bg-primary text-white hover:bg-orange-700"
+    : "bg-white border border-gray-200 text-gray-600 hover:border-primary hover:text-primary";
+const btnCls = clsx(
+    "px-8 py-2.5 text-sm font-semibold rounded-full shadow-md transition-colors cursor-pointer",
+    activeCls,
+);
+---
+
+<a class={btnCls} href={href}>
+    <slot />
+</a>

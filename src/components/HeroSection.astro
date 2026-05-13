@@ -1,0 +1,46 @@
+---
+import { Image } from "astro:assets";
+import heroImg from "../assets/hero.png";
+---
+
+<section class="relative w-full bg-slate-50 overflow-hidden">
+    <div class="max-w-350 mx-auto px-4 md:px-10 py-16 md:py-24 relative z-10">
+        <div
+            class="flex flex-col items-center text-center max-w-3xl mx-auto gap-6 mb-12"
+        >
+            <h1
+                class="text-5xl md:text-7xl font-serif font-medium text-gray-900 leading-[1.1]"
+            >
+                Best Cuban Food for your taste
+            </h1>
+            <p
+                class="text-gray-600 text-lg md:text-xl font-light max-w-2xl mx-auto"
+            >
+                Discover authentic flavors and unforgettable moments in our
+                welcoming culinary haven.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 mt-4">
+                <button
+                    class="px-8 py-3 bg-primary hover:bg-orange-700 text-white text-sm font-bold rounded-full transition-colors shadow-lg shadow-orange-200"
+                >
+                    Inicia la Ruta
+                </button>
+            </div>
+        </div>
+        <Image
+            src={heroImg}
+            class="w-full aspect-video md:aspect-21/9 rounded-3xl shadow-2xl mt-8 object-cover object-[center_60%]"
+            alt="Traditional Cuban Ropa Vieja plate with beef rice and plantains"
+            loading="eager"
+            fetchpriority="high"
+        />
+    </div>
+    <div
+        class="absolute top-0 left-0 w-64 h-64 bg-green-50 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2 opacity-50 pointer-events-none"
+    >
+    </div>
+    <div
+        class="absolute bottom-0 right-0 w-96 h-96 bg-orange-50 rounded-full blur-3xl translate-x-1/2 -translate-y-1/2 opacity-50 pointer-events-none"
+    >
+    </div>
+</section>

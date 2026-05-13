@@ -1,0 +1,109 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import MenuCategory from "../../components/MenuCategory.astro";
+import MenuItem from "../../components/MenuItem.astro";
+import { getEntry, getCollection } from "astro:content";
+
+export async function getStaticPaths() {
+    const categories = await getCollection("menu");
+    return categories.map((category) => ({
+        params: { category: category.id },
+    }));
+}
+
+// type Menu = {
+//     name: string;
+//     thumbnail: string;
+//     description: string;
+//     category: "sandwiches" | "main-courses" | "drinks" | "desserts" | "sides";
+// };
+
+const { category } = Astro.params;
+if (!category) {
+    Astro.redirect("/menu/sandwiches");
+}
+const menuCollection = await getEntry("menu", category!);
+const menuItems = menuCollection?.data ?? [];
+---
+
+<Layout>
+    <main class="grow">
+        <section class="relative w-full bg-white pt-24 pb-12">
+            <div class="max-w-350 mx-auto px-4 md:px-10 text-center">
+                <h1
+                    class="text-5xl md:text-7xl font-serif font-medium text-gray-900 mb-6"
+                >
+                    Nuestro Menú
+                </h1>
+                <p
+                    class="text-gray-600 text-lg md:text-xl font-light max-w-2xl mx-auto"
+                >
+                    We Consider All The Drivers Of Change Gives You The
+                    Components You Need To Change To Create A Truly Authentic
+                    Flavor.
+                </p>
+                <div class="flex flex-wrap justify-center gap-3 mt-12">
+                    <MenuCategory
+                        href="/menu/sandwichs"
+                        isActive={category === "sandwichs"}
+                    >
+                        Sandwiches
+                    </MenuCategory>
+                    <MenuCategory
+                        href="/menu/main-courses"
+                        isActive={category === "main-courses"}
+                    >
+                        Main Courses
+                    </MenuCategory>
+                    <MenuCategory
+                        href="/menu/drinks"
+                        isActive={category === "drinks"}
+                    >
+                        Drinks
+                    </MenuCategory>
+                    <MenuCategory
+                        href="/menu/desserts"
+                        isActive={category === "desserts"}
+                    >
+                        Desserts
+                    </MenuCategory>
+                    <MenuCategory
+                        href="/menu/sides"
+                        isActive={category === "sides"}
+                    >
+                        Sides
+                    </MenuCategory>
+                </div>
+            </div>
+        </section>
+        <section class="py-12 pb-24 bg-white">
+            <div class="max-w-350 mx-auto px-4 md:px-10">
+                <div
+                    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-12"
+                >
+                    {menuItems.map((item) => <MenuItem product={item} />)}
+                </div>
+            </div>
+        </section>
+        <section class="py-20 bg-background-light">
+            <div class="max-w-350 mx-auto px-4 md:px-10">
+                <div
+                    class="flex flex-col md:flex-row items-center justify-between gap-12"
+                >
+                    <div class="md:w-1/3 text-left">
+                        <h2
+                            class="text-4xl md:text-5xl font-serif font-medium text-gray-900 mb-6 leading-tight"
+                        >
+                            Pide por Delivery
+                        </h2>
+                        <p class="text-gray-600 text-lg leading-relaxed mb-8">
+                            Disfruta de tus platos favoritos de Cuba Route desde
+                            la comodidad de tu hogar. Estamos disponibles en las
+                            plataformas principales.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+</Layout>
