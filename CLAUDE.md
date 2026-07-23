@@ -28,7 +28,7 @@ The menu is powered by an Astro content collection defined in [src/content.confi
 - Each file is an array of items validated by a Zod schema: `{ name, thumbnail: image(), description }`. `thumbnail` must resolve to an image file under `src/assets/` (validated/optimized via Astro's `image()` helper).
 - To add a menu category: drop a new `src/data/<category>.json` file (array of `{name, thumbnail, description}`) with matching images in `src/assets/`. No route or config changes needed — [src/pages/menu/[category].astro](src/pages/menu/[category].astro) generates static paths for every entry in the collection automatically via `getStaticPaths` + `getCollection("menu")`.
 - **Known naming quirk**: the sandwiches category file/slug is `sandwichs` (no "e"), not `sandwichs`/`sandwiches` consistently — links and `MenuCategory` `isActive` checks use the literal slug `sandwichs`. Keep new category slugs consistent with the filename used across `astro.config.mjs` redirects, `MenuSection.astro` links, and `[category].astro`'s `MenuCategory` blocks.
-- **Known data/template mismatch**: `MenuItem.astro` renders `product.title`, but the Zod schema and JSON data define `name`, not `title` — menu item names currently render blank. Check this when touching `MenuItem.astro` or the JSON schema.
+- `MenuItem.astro` types its `product` prop as `CollectionEntry<"menu">["data"][number]`, so schema changes in `content.config.ts` surface as type errors there rather than as silently blank fields.
 
 ### Routing
 

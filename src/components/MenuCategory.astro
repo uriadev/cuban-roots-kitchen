@@ -1,15 +1,23 @@
 ---
 import clsx from "clsx";
+
+interface Props {
+    href: string;
+    isActive?: boolean;
+}
+
 const { isActive, href } = Astro.props;
 const activeCls = isActive
     ? "bg-primary text-white hover:bg-orange-700"
     : "bg-white border border-gray-200 text-gray-600 hover:border-primary hover:text-primary";
 const btnCls = clsx(
-    "px-8 py-2.5 text-sm font-semibold rounded-full shadow-md transition-colors cursor-pointer",
+    // shrink-0 / whitespace-nowrap keep the pills intact inside the horizontally
+    // scrolling strip they sit in on phones.
+    "shrink-0 whitespace-nowrap px-5 sm:px-8 py-2.5 text-sm font-semibold rounded-full shadow-md transition-colors cursor-pointer",
     activeCls,
 );
 ---
 
-<a class={btnCls} href={href}>
+<a class={btnCls} href={href} aria-current={isActive ? "page" : undefined}>
     <slot />
 </a>

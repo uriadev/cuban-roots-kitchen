@@ -1,146 +1,32 @@
 ---
 import { Image } from "astro:assets";
-import { Plus } from "@lucide/astro";
+import type { CollectionEntry } from "astro:content";
 
 interface Props {
-    product: any;
+    product: CollectionEntry<"menu">["data"][number];
 }
 
-const { product } = Astro.props as Props;
+const { product } = Astro.props;
 ---
 
 <div class="group flex flex-col items-center text-center scroll-fade-in">
     <div
-        class="w-full aspect-square rounded-full overflow-hidden mb-6 shadow-xl relative"
+        class="w-full aspect-square rounded-full overflow-hidden mb-4 sm:mb-6 shadow-lg sm:shadow-xl relative"
     >
         <Image
-            src={product.thumbnail!}
-            width={274}
-            height={274}
+            src={product.thumbnail}
+            widths={[160, 240, 320, 480, 640]}
+            sizes="(min-width: 1024px) 18rem, (min-width: 768px) 30vw, 45vw"
             class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
-            alt={product.description!}
+            alt={product.name}
         />
     </div>
-    <!-- <span class="text-primary font-bold text-xl mb-2">{price}</span> -->
-    <h3 class="text-xl font-serif font-bold text-gray-900 mb-3">
+    <h3
+        class="text-lg sm:text-xl font-serif font-bold text-gray-900 mb-2 sm:mb-3"
+    >
         {product.name}
     </h3>
-    <p class="text-gray-500 text-sm leading-relaxed px-4">
+    <p class="text-gray-500 text-sm leading-relaxed px-1 sm:px-4 text-pretty">
         {product.description}
     </p>
-    <!-- <button
-        class="mt-5 px-5 py-2 bg-primary text-white text-sm font-semibold rounded-full shadow-md hover:bg-orange-700 transition-colors flex items-center gap-1"
-        command="show-modal"
-        commandfor="product-dialog"
-    >
-        Add
-    </button> -->
 </div>
-<dialog
-    id="product-dialog"
-    closedby="any"
-    class="mx-auto mt-15 rounded-xl shadow-2xl open:flex flex-col md:flex-row"
->
-    <!-- Close Button (Floating) -->
-    <!-- <button
-        aria-label="Close modal"
-        class="absolute top-4 right-4 z-50 bg-surface-container-lowest/80 backdrop-blur-md p-2 rounded-full text-on-surface hover:bg-surface-variant transition-colors"
-        command="close" commandfor="product-dialog"
-    >
-        <span
-            class="material-symbols-outlined"
-            style="font-variation-settings: 'FILL' 0;">close</span
-        >
-    </button> -->
-    <!-- Image Section -->
-    <div class="md:w-1/2 relative h-64 md:h-auto bg-surface-variant shrink-0">
-        <img
-            alt="Cuban Sandwich"
-            class="absolute inset-0 w-full h-full object-cover"
-            data-alt="A mouth-watering, close-up shot of an authentic Cuban sandwich sliced in half to reveal layers of roasted pork, sliced ham, melted Swiss cheese, pickles, and yellow mustard. The sandwich is pressed to golden-brown perfection on authentic Cuban bread, sitting on a rustic wooden board. The lighting is warm and natural, evoking a sunny afternoon in a Havana cafe, highlighting the crispy crust and juicy interior against a soft, creamy background."
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDp0PAlMoRkbFT43CluP8P-okWz5723aG9OdbuJXlQWnQmp3DiY9afVoSonGtCepoTzs_DfV_KGk-9CvUFYF6Wn5qstYpzI6Z-GHAO59AXdZme0P7Dc6eoP06WCIx3KrQtZ66yxCaFhUoA3A2dOvGw7yXMXdB_hJLw79Ae7CJKuNmZqcp8DoDWYR8QYV5nKwj6APB_lI-rdHGZ2pr-srXDHWlwkkZc_EK6oWDYIAEyRv0doIWyTbtZG43PoQMyvn2XjpqSTFVzeQSE1"
-        />
-    </div>
-    <!-- Details Section -->
-    <div
-        class="md:w-1/2 flex flex-col h-full bg-surface-container-lowest overflow-y-auto"
-    >
-        <div class="p-8 grow">
-            <!-- Title & Price -->
-            <div class="flex justify-between items-start mb-4">
-                <h1 class="font-headline-lg text-headline-lg text-on-surface">
-                    Cuban Sandwich
-                </h1>
-                <span class="font-headline-md text-headline-md text-primary"
-                    >$14.99</span
-                >
-            </div>
-            <!-- Description -->
-            <p class="font-body-lg text-body-lg text-on-surface-variant mb-8">
-                Roasted pork, ham, swiss cheese, pickles, mustard on pressed
-                Cuban bread. Our signature sandwich pressed to crispy
-                perfection.
-            </p>
-            <hr class="border-outline-variant mb-8" />
-            <!-- Customizations -->
-            <div class="mb-8">
-                <h3
-                    class="font-label-sm text-label-sm text-on-surface uppercase mb-4 tracking-widest"
-                >
-                    Customize Your Order
-                </h3>
-                <div class="space-y-4">
-                    <!-- Option 1 -->
-                    <label
-                        class="flex items-center justify-between p-4 border border-outline-variant rounded-DEFAULT cursor-pointer hover:bg-surface-container-low transition-colors"
-                    >
-                        <div class="flex items-center gap-3">
-                            <input
-                                class="w-5 h-5 rounded border-outline text-primary focus:ring-primary"
-                                type="checkbox"
-                            />
-                            <span
-                                class="font-body-md text-body-md text-on-surface"
-                                >No Pickles</span
-                            >
-                        </div>
-                    </label>
-                    <!-- Option 2 -->
-                    <label
-                        class="flex items-center justify-between p-4 border border-outline-variant rounded-DEFAULT cursor-pointer hover:bg-surface-container-low transition-colors"
-                    >
-                        <div class="flex items-center gap-3">
-                            <input
-                                class="w-5 h-5 rounded border-outline text-primary focus:ring-primary"
-                                type="checkbox"
-                            />
-                            <span
-                                class="font-body-md text-body-md text-on-surface"
-                                >Extra Mustard</span
-                            >
-                        </div>
-                    </label>
-                    <!-- Option 3 -->
-                    <label
-                        class="flex items-center justify-between p-4 border border-outline-variant rounded-DEFAULT cursor-pointer hover:bg-surface-container-low transition-colors"
-                    >
-                        <div class="flex items-center gap-3">
-                            <input
-                                class="w-5 h-5 rounded border-outline text-primary focus:ring-primary"
-                                type="checkbox"
-                            />
-                            <span
-                                class="font-body-md text-body-md text-on-surface"
-                                >Extra Cheese</span
-                            >
-                        </div>
-                        <span
-                            class="font-body-md text-body-md text-on-surface-variant"
-                            >+$1.50</span
-                        >
-                    </label>
-                </div>
-            </div>
-        </div>
-    </div>
-</dialog>

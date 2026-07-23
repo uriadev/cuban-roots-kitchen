@@ -8,3 +8,13 @@
     --color-text-light: #2d3748;
     --color-accent-green: #4a7c59
 }
+
+/* For horizontally scrollable strips (e.g. the menu category pills on phones),
+   where a visible scrollbar reads as a rendering glitch rather than a control. */
+@utility no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}

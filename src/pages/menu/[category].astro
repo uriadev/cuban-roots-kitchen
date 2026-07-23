@@ -3,6 +3,7 @@ import Layout from "../../layouts/Layout.astro";
 import MenuCategory from "../../components/MenuCategory.astro";
 import MenuItem from "../../components/MenuItem.astro";
 import { getEntry, getCollection } from "astro:content";
+import clsx from "clsx";
 
 export async function getStaticPaths() {
     const categories = await getCollection("menu");
@@ -11,38 +12,49 @@ export async function getStaticPaths() {
     }));
 }
 
-// type Menu = {
-//     name: string;
-//     thumbnail: string;
-//     description: string;
-//     category: "sandwiches" | "main-courses" | "drinks" | "desserts" | "sides";
-// };
-
 const { category } = Astro.params;
 if (!category) {
-    Astro.redirect("/menu/sandwiches");
+    Astro.redirect("/menu/sandwichs");
 }
 const menuCollection = await getEntry("menu", category!);
 const menuItems = menuCollection?.data ?? [];
+
+// Categories hold as few as one dish, so a fixed 4-column track would strand a
+// lone item in the left column. Narrow the grid to the item count instead.
+const count = menuItems.length;
+const gridCls = clsx(
+    "mx-auto grid gap-x-6 gap-y-10 sm:gap-x-8 sm:gap-y-12",
+    count === 1 && "max-w-xs grid-cols-1",
+    count === 2 && "max-w-2xl grid-cols-2",
+    count === 3 && "max-w-4xl grid-cols-2 md:grid-cols-3",
+    count >= 4 && "grid-cols-2 md:grid-cols-3 lg:grid-cols-4",
+);
 ---
 
 <Layout>
     <main class="grow">
-        <section class="relative w-full bg-white pt-24 pb-12">
+        <section
+            class="relative w-full bg-white pt-12 pb-4 sm:pt-16 md:pt-24 md:pb-12"
+        >
             <div class="max-w-350 mx-auto px-4 md:px-10 text-center">
                 <h1
-                    class="text-5xl md:text-7xl font-serif font-medium text-gray-900 mb-6"
+                    class="text-4xl sm:text-5xl md:text-7xl font-serif font-medium text-gray-900 mb-4 md:mb-6"
                 >
                     Our Menu
                 </h1>
                 <p
-                    class="text-gray-600 text-lg md:text-xl font-light max-w-2xl mx-auto"
+                    class="text-gray-600 text-base sm:text-lg md:text-xl font-light max-w-2xl mx-auto text-pretty"
                 >
                     We Consider All The Drivers Of Change Gives You The
                     Components You Need To Change To Create A Truly Authentic
                     Flavor.
                 </p>
-                <div class="flex flex-wrap justify-center gap-3 mt-12">
+                <!-- The five pills never fit one row on a phone, so the strip
+                     scrolls edge-to-edge there and wraps/centres from md up. -->
+                <div
+                    id="category-strip"
+                    class="mt-8 pb-4 md:mt-12 -mx-4 px-4 md:mx-0 md:px-0 flex gap-2 md:gap-3 overflow-x-auto no-scrollbar md:flex-wrap md:justify-center md:overflow-visible"
+                >
                     <MenuCategory
                         href="/menu/sandwichs"
                         isActive={category === "sandwichs"}
@@ -76,27 +88,27 @@ const menuItems = menuCollection?.data ?? [];
                 </div>
             </div>
         </section>
-        <section class="py-12 pb-24 bg-white">
+        <section class="py-10 pb-16 sm:py-12 sm:pb-24 bg-white">
             <div class="max-w-350 mx-auto px-4 md:px-10">
-                <div
-                    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-12"
-                >
+                <div class={gridCls}>
                     {menuItems.map((item) => <MenuItem product={item} />)}
                 </div>
             </div>
         </section>
-        <section class="py-20 bg-background-light">
+        <section class="py-14 md:py-20 bg-background-light">
             <div class="max-w-350 mx-auto px-4 md:px-10">
                 <div
-                    class="flex flex-col md:flex-row items-center justify-between gap-12"
+                    class="flex flex-col md:flex-row items-start md:items-center justify-between gap-8 md:gap-12"
                 >
                     <div class="md:w-1/3 text-left">
                         <h2
-                            class="text-4xl md:text-5xl font-serif font-medium text-gray-900 mb-6 leading-tight"
+                            class="text-3xl sm:text-4xl md:text-5xl font-serif font-medium text-gray-900 mb-4 md:mb-6 leading-tight"
                         >
                             Order for Delivery
                         </h2>
-                        <p class="text-gray-600 text-lg leading-relaxed mb-8">
+                        <p
+                            class="text-gray-600 text-base sm:text-lg leading-relaxed"
+                        >
                             Enjoy your favorite dishes from Cuban Roots Kitchen
                             from the comfort of your home. We're available on
                             the main delivery platforms.
@@ -107,3 +119,13 @@ const menuItems = menuCollection?.data ?? [];
         </section>
     </main>
 </Layout>
+
+<script>
+    // The active pill can sit off-screen in the scrolling strip (e.g. "Sides").
+    // Only nudge it into view while the strip actually scrolls.
+    if (window.matchMedia("(max-width: 767px)").matches) {
+        document
+            .querySelector("#category-strip [aria-current='page']")
+            ?.scrollIntoView({ inline: "center", block: "nearest" });
+    }
+</script>
