@@ -1,1 +1,7 @@
-[]
+[
+    {
+        "name": "Flan",
+        "thumbnail": "../assets/flan.png",
+        "description": "Classic Cuban flan with a caramelized sugar top"
+    }
+]

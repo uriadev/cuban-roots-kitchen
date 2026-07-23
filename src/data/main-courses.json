@@ -1,1 +1,22 @@
-[]
+[
+    {
+        "name": "Plato 1",
+        "thumbnail": "../assets/congris-pork.png",
+        "description": "Congrí, slow-roasted pork or pork fricassee, sweet plantains, and salad."
+    },
+    {
+        "name": "Plato 2",
+        "thumbnail": "../assets/chicken-yellowrice.png",
+        "description": "Yellow rice, chicken cazuela, cassava with garlic mojo, and salad."
+    },
+    {
+        "name": "Plato 3",
+        "thumbnail": "../assets/ropavieja-potaje.png",
+        "description": "White rice, black beans, shredded beef ropa vieja, and tostones."
+    },
+    {
+        "name": "Plato 4",
+        "thumbnail": "../assets/congris-fricase.png",
+        "description": "Congrí, pork fricassee, cassava with garlic mojo, and salad."
+    }
+]

@@ -1,5 +1,5 @@
 ---
-import { UtensilsCrossed, Menu } from "@lucide/astro";
+import { UtensilsCrossed, Menu, X } from "@lucide/astro";
 ---
 
 <header class="sticky top-0 z-100 w-full bg-white shadow-sm">
@@ -43,9 +43,74 @@ import { UtensilsCrossed, Menu } from "@lucide/astro";
             }
         </div>
         <button
+            id="mobile-menu-toggle"
+            type="button"
             class="md:hidden flex items-center justify-center text-text-light"
+            aria-controls="mobile-menu"
+            aria-expanded="false"
+            aria-label="Open menu"
         >
-            <Menu />
+            <Menu class="menu-icon" />
+            <X class="close-icon hidden" />
         </button>
     </div>
+    <nav
+        id="mobile-menu"
+        class="hidden md:hidden border-t border-gray-100 bg-white shadow-sm"
+        aria-label="Mobile"
+    >
+        <div class="max-w-350 mx-auto px-4 py-2 flex flex-col">
+            <a
+                class="text-gray-600 hover:text-primary font-medium text-sm transition-colors py-3 border-b border-gray-100 last:border-b-0"
+                href="/">Home</a
+            >
+            <a
+                class="text-gray-600 hover:text-primary font-medium text-sm transition-colors py-3 border-b border-gray-100 last:border-b-0"
+                href="/#story-section">About</a
+            >
+            <a
+                class="text-gray-600 hover:text-primary font-medium text-sm transition-colors py-3 border-b border-gray-100 last:border-b-0"
+                href="/menu">Menu</a
+            >
+            <a
+                class="text-gray-600 hover:text-primary font-medium text-sm transition-colors py-3 border-b border-gray-100 last:border-b-0"
+                href="#contact">Contact</a
+            >
+        </div>
+    </nav>
 </header>
+
+<script>
+    const toggle = document.getElementById("mobile-menu-toggle");
+    const menu = document.getElementById("mobile-menu");
+    const menuIcon = toggle?.querySelector<SVGElement>(".menu-icon");
+    const closeIcon = toggle?.querySelector<SVGElement>(".close-icon");
+
+    function setOpen(open: boolean) {
+        if (!toggle || !menu) return;
+        menu.classList.toggle("hidden", !open);
+        toggle.setAttribute("aria-expanded", String(open));
+        toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+        menuIcon?.classList.toggle("hidden", open);
+        closeIcon?.classList.toggle("hidden", !open);
+    }
+
+    toggle?.addEventListener("click", () => {
+        setOpen(toggle.getAttribute("aria-expanded") !== "true");
+    });
+
+    // Close when a link is tapped (e.g. in-page anchors that don't reload).
+    menu?.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", () => setOpen(false));
+    });
+
+    // Close on Escape, and reset when crossing the md breakpoint.
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") setOpen(false);
+    });
+    window
+        .matchMedia("(min-width: 768px)")
+        .addEventListener("change", (e) => {
+            if (e.matches) setOpen(false);
+        });
+</script>

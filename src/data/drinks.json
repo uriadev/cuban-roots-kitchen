@@ -1,1 +1,22 @@
-[]
+[
+    {
+        "name": "Coca-Cola Original",
+        "thumbnail": "../assets/coke.png",
+        "description": "The classic Coca-Cola experience, known for its refreshing taste and iconic branding. Perfect for any occasion."
+    },
+    {
+        "name": "Coca-Cola Zero Sugar",
+        "thumbnail": "../assets/coke.png",
+        "description": "The classic Coca-Cola experience without the sugar. Perfect for those who want to enjoy the taste without the calories."
+    },
+    {
+        "name": "Orange Fanta",
+        "thumbnail": "../assets/fanta.png",
+        "description": "A fruity and refreshing orange-flavored soda that brings a burst of citrusy goodness to your taste buds. Ideal for a fun and lively beverage choice."
+    },
+    {
+        "name": "Guava juice",
+        "thumbnail": "../assets/guava.png",
+        "description": "A vibrant and tropical guava juice that delivers a burst of exotic flavor. Perfect for a refreshing and healthy drink option."
+    }
+]
