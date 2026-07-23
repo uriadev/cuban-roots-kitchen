@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project overview
 
-Marketing/menu website for "Cuba Route," a Cuban restaurant. Built with Astro (v7, output via `@astrojs/vercel` adapter) and Tailwind CSS v4. Content is bilingual-leaning (UI copy mixes English and Spanish, e.g. "Pide por Delivery", "Ver Opciones") — match the existing tone when editing copy.
+Marketing/menu website for "Cuban Roots Kitchen," a Cuban restaurant. Built with Astro (v7, output via `@astrojs/vercel` adapter) and Tailwind CSS v4. Content is bilingual-leaning (UI copy mixes English and Spanish, e.g. "Pide por Delivery", "Ver Opciones") — match the existing tone when editing copy.
 
 ## Commands
 
