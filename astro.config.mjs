@@ -7,6 +7,8 @@ import vercel from "@astrojs/vercel";
 
 // https://astro.build/config
 export default defineConfig({
+  site: "https://cubanrootskitchen.ie",
+
   vite: {
     plugins: [tailwindcss()]
   },
