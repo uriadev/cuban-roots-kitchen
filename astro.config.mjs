@@ -17,5 +17,9 @@ export default defineConfig({
     "/menu": "/menu/sandwichs",
   },
 
-  adapter: vercel(),
+  adapter: vercel({
+    webAnalytics: {
+      enabled: true
+    },
+  }),
 });
